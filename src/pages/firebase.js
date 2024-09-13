@@ -5,13 +5,20 @@ import { getAuth } from 'firebase/auth';
 import { getStorage } from 'firebase/storage'; // Import getStorage
 
 const firebaseConfig = {
-    apiKey: "AIzaSyB0AfFZBR-BJZPSNsp11jBkhy7d3TV7rEM",
-    authDomain: "notesapp-dixitk941.firebaseapp.com",
-    projectId: "notesapp-dixitk941",
-    storageBucket: "notesapp-dixitk941.appspot.com",
-    messagingSenderId: "702011833511",
-    appId: "1:702011833511:web:e1b4a6feffeb1a37736f82",
-    measurementId: "G-P6R1JZNXHS"
+    apiKey: "AIzaSyCPi8Kwdvs4XB0jyQ7AZTSjAlLrYBnQvMI",
+
+    authDomain: "bail-reckoner-21549.firebaseapp.com",
+  
+    projectId: "bail-reckoner-21549",
+  
+    storageBucket: "bail-reckoner-21549.appspot.com",
+  
+    messagingSenderId: "372088590601",
+  
+    appId: "1:372088590601:web:c5b3198dd00135a65bc3d8",
+  
+    measurementId: "G-JW4YZHW29R"
+  
 };
 
 const app = initializeApp(firebaseConfig);
