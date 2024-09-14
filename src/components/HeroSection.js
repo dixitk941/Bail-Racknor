@@ -84,7 +84,7 @@ const HeroSection = () => {
         >
           <div className="relative">
             <img
-              src="https://via.placeholder.com/500x400"
+              src="https://th.bing.com/th/id/OIP.gy7NAPPuBswV_-uI4fvANQHaE8?rs=1&pid=ImgDetMain"
               alt="Bail Application Process"
               className="rounded-lg shadow-2xl border-4 border-yellow-300 transform hover:rotate-3 hover:scale-105 transition-all duration-500"
             />
