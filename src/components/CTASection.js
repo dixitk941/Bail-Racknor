@@ -1,6 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 
 const CTASection = () => {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://api.example.com/data');
+        if (!response.ok) {
+          throw new Error(`API request failed with status ${response.status}`);
+        }
+        const data = await response.json();
+        setData(data);
+      } catch (error) {
+        console.error('Failed to fetch data:', error);
+        // You can also display a user-friendly error message here
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <section className="bg-indigo-600 py-20 px-5 lg:px-20 text-center text-white">
       <div className="max-w-7xl mx-auto">
@@ -33,42 +53,3 @@ const CTASection = () => {
 };
 
 export default CTASection;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
