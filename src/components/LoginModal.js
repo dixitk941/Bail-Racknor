@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { auth } from '../firebase'; // Ensure firebase is properly configured
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { auth, googleProvider } from './firebase'; // Ensure firebase is properly configured
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup } from 'firebase/auth';
 
 const LoginModal = ({ onClose, onLoginSuccess }) => {
     const [email, setEmail] = useState('');
@@ -33,6 +33,19 @@ const LoginModal = ({ onClose, onLoginSuccess }) => {
             onLoginSuccess();
         } catch (err) {
             setError(err.message);
+        }
+    };
+
+    const handleGoogleLogin = async () => {
+        setError('');
+        setLoading(true);
+        try {
+            await signInWithPopup(auth, googleProvider);
+            onLoginSuccess();
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -91,14 +104,18 @@ const LoginModal = ({ onClose, onLoginSuccess }) => {
                 >
                     {isLogin ? 'Switch to Sign Up' : 'Switch to Login'}
                 </button>
-                {!isLogin && (
-                    <button
-                        onClick={handleLogout}
-                        className="mt-4 text-red-500 hover:underline"
-                    >
-                        Logout
-                    </button>
-                )}
+                <button
+                    onClick={handleGoogleLogin}
+                    className="mt-4 w-full p-3 rounded-lg text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
+                >
+                    Sign in with Google
+                </button>
+                <button
+                    onClick={handleLogout}
+                    className="mt-4 text-red-500 hover:underline"
+                >
+                    Logout
+                </button>
             </div>
         </div>
     );
