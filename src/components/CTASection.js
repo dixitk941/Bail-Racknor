@@ -1,93 +1,53 @@
-import React, { useEffect, useRef } from 'react';
-import * as THREE from 'three';
-
-const CTASection = () => {
-  const mountRef = useRef(null);
-
-  useEffect(() => {
-    // Check if mountRef.current is not null
-    if (!mountRef.current) return;
-
-    // Set up the scene
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 4;
-
-    // Set up the renderer
-    const renderer = new THREE.WebGLRenderer({ alpha: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    mountRef.current.appendChild(renderer.domElement);
-
-    // Create a 3D torus shape
-    const geometry = new THREE.TorusGeometry(1, 0.4, 16, 100);
-    const material = new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 0.6, roughness: 0.3 });
-    const torus = new THREE.Mesh(geometry, material);
-    scene.add(torus);
-
-    // Add light
-    const pointLight = new THREE.PointLight(0xffffff, 1);
-    pointLight.position.set(5, 5, 5);
-    scene.add(pointLight);
-
-    // Animation loop
-    const animate = function () {
-      requestAnimationFrame(animate);
-      torus.rotation.x += 0.01;
-      torus.rotation.y += 0.01;
-      renderer.render(scene, camera);
-    };
-    animate();
-
-    // Handle window resize
-    const handleResize = () => {
-      const { innerWidth, innerHeight } = window;
-      renderer.setSize(innerWidth, innerHeight);
-      camera.aspect = innerWidth / innerHeight;
-      camera.updateProjectionMatrix();
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    // Clean up
-    return () => {
-      if (mountRef.current && mountRef.current.firstChild) {
-        mountRef.current.removeChild(renderer.domElement);
-      }
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
+export default function CTA() {
   return (
-    <section className="relative w-full h-screen overflow-hidden text-white">
-      <div ref={mountRef} className="absolute inset-0" />
-
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-500 opacity-90 z-0"></div>
-
-      <div className="relative z-10 h-full flex flex-col justify-center items-center text-center p-6">
-        <div className="backdrop-blur-lg bg-white bg-opacity-10 rounded-2xl p-10 shadow-lg max-w-2xl">
-          <h2 className="text-4xl font-bold mb-6">Transform the Bail Process</h2>
-          <p className="text-lg lg:text-xl max-w-xl mx-auto mb-6">
-            Simplify bail applications with Bail Reckoner. Seamless, secure, and transparent – start today!
-          </p>
-
-          <div className="mt-6 flex justify-center space-x-4">
-            <a
-              href="#"
-              className="bg-white text-indigo-600 px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-gray-100 transition transform hover:-translate-y-1 hover:shadow-2xl"
-            >
-              Get Started
-            </a>
-            <a
-              href="#"
-              className="border-2 border-white text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-white hover:text-indigo-600 transition transform hover:-translate-y-1 hover:shadow-2xl"
-            >
-              Learn More
-            </a>
+    <div className="bg-gray-900">
+      <div className="mx-auto max-w-7xl py-24 sm:px-6 sm:py-32 lg:px-8">
+        <div className="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
+          <svg
+            viewBox="0 0 1024 1024"
+            aria-hidden="true"
+            className="absolute left-1/2 top-1/2 -z-10 h-[64rem] w-[64rem] -translate-y-1/2 [mask-image:radial-gradient(closest-side,white,transparent)] sm:left-full sm:-ml-80 lg:left-1/2 lg:ml-0 lg:-translate-x-1/2 lg:translate-y-0"
+          >
+            <circle r={512} cx={512} cy={512} fill="url(#gradient)" fillOpacity="0.7" />
+            <defs>
+              <radialGradient id="gradient">
+                <stop stopColor="#FFBB00" />
+                <stop offset={1} stopColor="#FF6600" />
+              </radialGradient>
+            </defs>
+          </svg>
+          <div className="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
+            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+              Transform the Bail Process.
+              <br />
+              Join Bail Reckoner Today.
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-gray-300">
+              Simplify bail applications with our comprehensive platform. Fast, secure, and tailored to your needs.
+            </p>
+            <div className="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
+              <a
+                href="#get-started"
+                className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              >
+                Get Started
+              </a>
+              <a href="#learn-more" className="text-sm font-semibold leading-6 text-white">
+                Learn More <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+          <div className="relative mt-16 h-80 lg:mt-8">
+            <img
+              alt="Bail Reckoner App Screenshot"
+              src="https://your-image-url-here.png" // Replace with your actual image URL
+              width={1824}
+              height={1080}
+              className="absolute left-0 top-0 w-[57rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10"
+            />
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
-};
-
-export default CTASection;
+}

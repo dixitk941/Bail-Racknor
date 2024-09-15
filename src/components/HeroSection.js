@@ -1,8 +1,10 @@
 import React, { Suspense, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { MeshDistortMaterial, Float } from "@react-three/drei";
-import { motion, useAnimation, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useAnimation, useInView } from "framer-motion";
 import { FaBalanceScale, FaUserShield, FaFileContract } from "react-icons/fa";
+import HowItWorksSection from "./HowItWorksSection"; // Import the new section
+import CTA from "./CTASection"; // Import the CTA section
 
 // Floating animated sphere
 const TransitionSphere = () => {
@@ -41,7 +43,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section ref={ref} className="relative bg-gradient-to-br from-purple-500 via-indigo-600 to-blue-500 py-12 px-4 lg:px-8 overflow-hidden min-h-screen flex flex-col items-center justify-center">
+    <section ref={ref} className="relative bg-white dark:bg-gray-900 py-12 px-4 lg:px-8 overflow-hidden min-h-screen flex flex-col items-center justify-center">
       {/* Background 3D Sphere */}
       <div className="absolute inset-0 z-0">
         <Canvas>
@@ -59,18 +61,18 @@ const HeroSection = () => {
           animate={controls}
           variants={textVariants}
         >
-          <h1 className="text-3xl lg:text-5xl font-bold text-white leading-tight drop-shadow-md">
+          <h1 className="text-3xl lg:text-5xl font-bold text-gray-900 dark:text-white leading-tight drop-shadow-md">
             Simplifying Bail Applications for <br />
             <span className="text-yellow-300">Undertrial Prisoners</span>
           </h1>
-          <p className="mt-4 text-base lg:text-lg text-gray-200 max-w-xs lg:max-w-md mx-auto lg:mx-0 leading-relaxed drop-shadow-lg">
+          <p className="mt-4 text-base lg:text-lg text-gray-700 dark:text-gray-300 max-w-xs lg:max-w-md mx-auto lg:mx-0 leading-relaxed drop-shadow-lg">
             Bail Reckoner is your digital companion, designed to streamline the bail process for undertrial prisoners, legal aid providers, and judicial authorities. Fast, secure, and efficient.
           </p>
           <div className="mt-6 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-            <button className="bg-yellow-300 text-gray-800 py-2 px-6 rounded-full shadow-lg hover:bg-yellow-400 transform hover:scale-105 transition duration-300">
+            <button className="bg-yellow-300 text-gray-800 dark:text-gray-900 py-2 px-6 rounded-full shadow-lg hover:bg-yellow-400 transform hover:scale-105 transition duration-300">
               Get Started
             </button>
-            <button className="bg-transparent text-white py-2 px-6 border border-white rounded-full hover:bg-white hover:text-indigo-600 transform hover:scale-105 transition duration-300">
+            <button className="bg-transparent text-gray-900 dark:text-white py-2 px-6 border border-gray-900 dark:border-white rounded-full hover:bg-gray-900 dark:hover:bg-white hover:text-white dark:hover:text-gray-900 transform hover:scale-105 transition duration-300">
               Learn More
             </button>
           </div>
@@ -103,9 +105,6 @@ const FeaturesSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
-  const { scrollYProgress } = useScroll();
-  const scale = useTransform(scrollYProgress, [0.2, 0.4], [0.5, 1.2]);
-
   React.useEffect(() => {
     if (isInView) {
       controls.start("visible");
@@ -120,50 +119,49 @@ const FeaturesSection = () => {
   return (
     <motion.section
       ref={ref}
-      className="bg-white py-12 px-4 lg:px-8"
-      style={{ scale }}
+      className="bg-white dark:bg-gray-900 py-12 px-4 lg:px-8"
       initial="hidden"
       animate={controls}
       variants={fadeVariants}
     >
       <div className="max-w-7xl mx-auto text-center">
         {/* Section Title */}
-        <h2 className="text-2xl lg:text-3xl font-bold text-gray-800">
+        <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-gray-100">
           Why Choose <span className="text-indigo-600">Bail Reckoner?</span>
         </h2>
-        <p className="mt-2 text-base lg:text-lg text-gray-600">
+        <p className="mt-2 text-base lg:text-lg text-gray-700 dark:text-gray-300">
           Our platform offers a variety of features designed to make the bail application process easier, faster, and more transparent.
         </p>
 
         {/* Features Grid */}
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Feature 1 */}
-          <div className="bg-gray-100 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+          <div className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
             <FaBalanceScale className="text-indigo-600 text-3xl mx-auto" />
-            <h3 className="text-lg font-semibold text-gray-800 mt-4">Legal Aid</h3>
-            <p className="mt-2 text-gray-600">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mt-4">Legal Aid</h3>
+            <p className="mt-2 text-gray-600 dark:text-gray-300">
               Connect with legal professionals and access tools to help with bail application processes efficiently.
             </p>
           </div>
 
           {/* Feature 2 */}
-          <div className="bg-gray-100 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+          <div className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
             <FaUserShield className="text-indigo-600 text-3xl mx-auto" />
-            <h3 className="text-lg font-semibold text-gray-800 mt-4">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mt-4">
               Secure Data
             </h3>
-            <p className="mt-2 text-gray-600">
+            <p className="mt-2 text-gray-600 dark:text-gray-300">
               Your information is encrypted and handled with care to ensure that all data remains private and secure.
             </p>
           </div>
 
           {/* Feature 3 */}
-          <div className="bg-gray-100 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+          <div className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
             <FaFileContract className="text-indigo-600 text-3xl mx-auto" />
-            <h3 className="text-lg font-semibold text-gray-800 mt-4">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mt-4">
               Transparent Process
             </h3>
-            <p className="mt-2 text-gray-600">
+            <p className="mt-2 text-gray-600 dark:text-gray-300">
               Track the bail application process step-by-step with real-time updates to keep you informed.
             </p>
           </div>
@@ -178,6 +176,8 @@ const App = () => {
     <div>
       <HeroSection />
       <FeaturesSection />
+      <HowItWorksSection /> {/* Add the HowItWorksSection here */}
+      <CTA /> {/* Add the CTA section here */}
     </div>
   );
 };
