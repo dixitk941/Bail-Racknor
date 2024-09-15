@@ -1,28 +1,29 @@
 import React, { Suspense, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
-import { MeshDistortMaterial, Float } from "@react-three/drei"; // For 3D animations
-import { motion, useAnimation, useInView } from "framer-motion";
+import { MeshDistortMaterial, Float } from "@react-three/drei";
+import { motion, useAnimation, useInView, useScroll, useTransform } from "framer-motion";
+import { FaBalanceScale, FaUserShield, FaFileContract } from "react-icons/fa";
 
 // Floating animated sphere
-const AnimatedSphere = () => {
+const TransitionSphere = () => {
   const sphereRef = useRef();
 
   return (
-    <Float speed={2} rotationIntensity={1} floatIntensity={2}>
+    <Float speed={3} rotationIntensity={2} floatIntensity={3}>
       <mesh ref={sphereRef} scale={1.5}>
-        <sphereGeometry args={[1.5, 32, 32]} />
-        <MeshDistortMaterial color="#6366F1" distort={0.5} speed={3} roughness={0} />
+        <sphereGeometry args={[1, 32, 32]} />
+        <MeshDistortMaterial color="#FFBB00" distort={0.7} speed={2} roughness={0} />
       </mesh>
     </Float>
   );
 };
 
+// Hero Section
 const HeroSection = () => {
   const controls = useAnimation();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
-  // Trigger animations when the section comes into view
   React.useEffect(() => {
     if (isInView) {
       controls.start("visible");
@@ -40,36 +41,36 @@ const HeroSection = () => {
   };
 
   return (
-    <section ref={ref} className="relative bg-gradient-to-br from-purple-500 via-indigo-600 to-blue-500 py-20 px-5 lg:px-20 overflow-hidden min-h-screen">
+    <section ref={ref} className="relative bg-gradient-to-br from-purple-500 via-indigo-600 to-blue-500 py-12 px-4 lg:px-8 overflow-hidden min-h-screen flex flex-col items-center justify-center">
       {/* Background 3D Sphere */}
       <div className="absolute inset-0 z-0">
         <Canvas>
           <Suspense fallback={null}>
-            <AnimatedSphere />
+            <TransitionSphere />
           </Suspense>
         </Canvas>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between">
+      <div className="relative z-10 max-w-7xl mx-auto flex flex-col items-center text-center lg:flex-row lg:text-left lg:justify-between">
         {/* Left side: Text content */}
         <motion.div
-          className="flex-1 text-center md:text-left"
+          className="flex-1 mb-10 lg:mb-0"
           initial="hidden"
           animate={controls}
           variants={textVariants}
         >
-          <h1 className="text-5xl lg:text-6xl font-bold text-white leading-tight drop-shadow-md">
+          <h1 className="text-3xl lg:text-5xl font-bold text-white leading-tight drop-shadow-md">
             Simplifying Bail Applications for <br />
             <span className="text-yellow-300">Undertrial Prisoners</span>
           </h1>
-          <p className="mt-5 text-lg text-gray-200 max-w-md mx-auto md:mx-0 leading-relaxed drop-shadow-lg">
+          <p className="mt-4 text-base lg:text-lg text-gray-200 max-w-xs lg:max-w-md mx-auto lg:mx-0 leading-relaxed drop-shadow-lg">
             Bail Reckoner is your digital companion, designed to streamline the bail process for undertrial prisoners, legal aid providers, and judicial authorities. Fast, secure, and efficient.
           </p>
-          <div className="mt-8 flex justify-center md:justify-start">
-            <button className="bg-yellow-300 text-gray-800 py-3 px-8 rounded-full shadow-lg hover:bg-yellow-400 transform hover:scale-105 transition duration-300">
+          <div className="mt-6 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+            <button className="bg-yellow-300 text-gray-800 py-2 px-6 rounded-full shadow-lg hover:bg-yellow-400 transform hover:scale-105 transition duration-300">
               Get Started
             </button>
-            <button className="ml-4 bg-transparent text-white py-3 px-8 border border-white rounded-full hover:bg-white hover:text-indigo-600 transform hover:scale-105 transition duration-300">
+            <button className="bg-transparent text-white py-2 px-6 border border-white rounded-full hover:bg-white hover:text-indigo-600 transform hover:scale-105 transition duration-300">
               Learn More
             </button>
           </div>
@@ -77,7 +78,7 @@ const HeroSection = () => {
 
         {/* Right side: Image */}
         <motion.div
-          className="flex-1 mt-10 md:mt-0 flex justify-center md:justify-end"
+          className="flex-1"
           initial="hidden"
           animate={controls}
           variants={imageVariants}
@@ -86,9 +87,8 @@ const HeroSection = () => {
             <img
               src="https://th.bing.com/th/id/OIP.gy7NAPPuBswV_-uI4fvANQHaE8?rs=1&pid=ImgDetMain"
               alt="Bail Application Process"
-              className="rounded-lg shadow-2xl border-4 border-yellow-300 transform hover:rotate-3 hover:scale-105 transition-all duration-500"
+              className="rounded-lg shadow-2xl border-4 border-yellow-300 transform hover:rotate-3 hover:scale-105 transition-all duration-500 w-full object-cover max-w-xs lg:max-w-md mx-auto"
             />
-            {/* Glow effect behind the image */}
             <div className="absolute top-0 left-0 w-full h-full rounded-lg bg-gradient-to-r from-yellow-300 via-transparent to-transparent opacity-30 blur-lg"></div>
           </div>
         </motion.div>
@@ -97,4 +97,89 @@ const HeroSection = () => {
   );
 };
 
-export default HeroSection;
+// Features Section with Scroll Transition
+const FeaturesSection = () => {
+  const controls = useAnimation();
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
+  const { scrollYProgress } = useScroll();
+  const scale = useTransform(scrollYProgress, [0.2, 0.4], [0.5, 1.2]);
+
+  React.useEffect(() => {
+    if (isInView) {
+      controls.start("visible");
+    }
+  }, [controls, isInView]);
+
+  const fadeVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+  };
+
+  return (
+    <motion.section
+      ref={ref}
+      className="bg-white py-12 px-4 lg:px-8"
+      style={{ scale }}
+      initial="hidden"
+      animate={controls}
+      variants={fadeVariants}
+    >
+      <div className="max-w-7xl mx-auto text-center">
+        {/* Section Title */}
+        <h2 className="text-2xl lg:text-3xl font-bold text-gray-800">
+          Why Choose <span className="text-indigo-600">Bail Reckoner?</span>
+        </h2>
+        <p className="mt-2 text-base lg:text-lg text-gray-600">
+          Our platform offers a variety of features designed to make the bail application process easier, faster, and more transparent.
+        </p>
+
+        {/* Features Grid */}
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Feature 1 */}
+          <div className="bg-gray-100 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+            <FaBalanceScale className="text-indigo-600 text-3xl mx-auto" />
+            <h3 className="text-lg font-semibold text-gray-800 mt-4">Legal Aid</h3>
+            <p className="mt-2 text-gray-600">
+              Connect with legal professionals and access tools to help with bail application processes efficiently.
+            </p>
+          </div>
+
+          {/* Feature 2 */}
+          <div className="bg-gray-100 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+            <FaUserShield className="text-indigo-600 text-3xl mx-auto" />
+            <h3 className="text-lg font-semibold text-gray-800 mt-4">
+              Secure Data
+            </h3>
+            <p className="mt-2 text-gray-600">
+              Your information is encrypted and handled with care to ensure that all data remains private and secure.
+            </p>
+          </div>
+
+          {/* Feature 3 */}
+          <div className="bg-gray-100 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+            <FaFileContract className="text-indigo-600 text-3xl mx-auto" />
+            <h3 className="text-lg font-semibold text-gray-800 mt-4">
+              Transparent Process
+            </h3>
+            <p className="mt-2 text-gray-600">
+              Track the bail application process step-by-step with real-time updates to keep you informed.
+            </p>
+          </div>
+        </div>
+      </div>
+    </motion.section>
+  );
+};
+
+const App = () => {
+  return (
+    <div>
+      <HeroSection />
+      <FeaturesSection />
+    </div>
+  );
+};
+
+export default App;

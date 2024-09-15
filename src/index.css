@@ -2,3 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+  
+  section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-color: #4f46e5; /* Fallback background in case Three.js doesn't load */
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  a:hover {
+    cursor: pointer;
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  
+  @keyframes ping {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(2); opacity: 0; }
+  }
+  
