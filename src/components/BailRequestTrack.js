@@ -1,18 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { db } from './firebase';
-import { collection, getDocs } from 'firebase/firestore';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth, db } from '../firebase'; // Ensure firebase is properly configured
+import { collection, query, where, getDocs } from 'firebase/firestore';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { Link } from 'react-router-dom';
+import './BailRequestTrack.css'; // We'll add custom CSS for the floating effect
 
-const BailRequestTrack = ({ theme }) => {
+const FloatingProgressBar = () => {
   const [bailRequests, setBailRequests] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [user] = useAuthState(auth);
 
   useEffect(() => {
     const fetchBailRequests = async () => {
+      if (!user) {
+        console.log('User not logged in');
+        return;
+      }
+
       try {
-        const querySnapshot = await getDocs(collection(db, 'bailRequests'));
+        const q = query(collection(db, 'bailRequests'), where('userId', '==', user.uid));
+        const querySnapshot = await getDocs(q);
         const requests = querySnapshot.docs.map(doc => ({
           id: doc.id,
           ...doc.data()
@@ -26,7 +35,7 @@ const BailRequestTrack = ({ theme }) => {
     };
 
     fetchBailRequests();
-  }, []);
+  }, [user]);
 
   const getStatusProgress = (status) => {
     switch (status) {
@@ -47,32 +56,32 @@ const BailRequestTrack = ({ theme }) => {
     return <div>Loading...</div>;
   }
 
-  const pathColor = theme === 'dark' ? '#ff0000' : '#ff6347'; // Bright red for dark theme, tomato for light theme
-  const textColor = theme === 'dark' ? '#ffffff' : '#000000'; // White text for dark theme, black text for light theme
+  if (!bailRequests.length) {
+    return <div>No bail requests found.</div>;
+  }
+
+  const latestRequest = bailRequests[0];
 
   return (
-    <div className="fixed bottom-4 right-4 z-50">
-      {bailRequests.map(request => (
-        <Link to={`/bailtrackpage/${request.id}`} key={request.id} className="mb-4 block">
-          <div style={{ width: 70, height: 70 }}>
-            <CircularProgressbar
-              value={getStatusProgress(request.status)}
-              text={`${getStatusProgress(request.status)}%`}
-              styles={buildStyles({
-                textSize: '16px',
-                pathColor: pathColor,
-                textColor: textColor,
-                trailColor: '#d6d6d6',
-              })}
-            />
-          </div>
-          <p className="text-center mt-2 text-sm" style={{ color: textColor }}>
-            {request.applicantName}
-          </p>
-        </Link>
-      ))}
-    </div>
+    <Link to={`/bailtrackpage/${latestRequest.id}`} className="fixed bottom-10 left-10 w-28 h-28">
+      <div className="bg-white shadow-lg p-3 rounded-full cursor-pointer floating-effect">
+        <CircularProgressbar
+          value={getStatusProgress(latestRequest.status)}
+          text={`${getStatusProgress(latestRequest.status)}%`}
+          styles={buildStyles({
+            textSize: '14px',
+            pathColor: getStatusProgress(latestRequest.status) === 100 ? '#4caf50' : '#ff6347',
+            textColor: '#000000',
+            trailColor: '#d6d6d6',
+          })}
+        />
+        <div className="mt-1 text-center">
+          <p className="text-xs font-semibold text-gray-700">Case: {latestRequest.caseNumber}</p>
+          <p className="text-xs text-gray-500">{latestRequest.applicantName}</p>
+        </div>
+      </div>
+    </Link>
   );
 };
 
-export default BailRequestTrack;
+export default FloatingProgressBar;

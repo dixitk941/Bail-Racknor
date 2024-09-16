@@ -7,9 +7,9 @@ import { onAuthStateChanged, signOut } from 'firebase/auth';
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [logoutConfirmOpen, setLogoutConfirmOpen] = useState(false); // State for logout confirmation modal
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
-
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -18,11 +18,11 @@ const Header = () => {
     return () => unsubscribe();
   }, []);
 
-  const openModal = () => {
+  const openLoginModal = () => {
     setIsModalOpen(true);
   };
 
-  const closeModal = () => {
+  const closeLoginModal = () => {
     setIsModalOpen(false);
   };
 
@@ -35,14 +35,23 @@ const Header = () => {
     setIsModalOpen(false);
   };
 
+  const openLogoutConfirm = () => {
+    setLogoutConfirmOpen(true); // Open the logout confirmation modal
+  };
+
+  const closeLogoutConfirm = () => {
+    setLogoutConfirmOpen(false); // Close the logout confirmation modal
+  };
+
   const handleLogout = async () => {
     try {
       await signOut(auth);
       console.log('Logged out successfully');
-      // Redirect to the homepage
-      navigate('/');
+      navigate('/'); // Redirect to homepage after logout
     } catch (err) {
       console.error('Logout failed', err.message);
+    } finally {
+      setLogoutConfirmOpen(false); // Close the modal after logging out
     }
   };
 
@@ -57,7 +66,7 @@ const Header = () => {
           <div className="flex md:order-2 space-x-3">
             {user ? (
               <button
-                onClick={handleLogout}
+                onClick={openLogoutConfirm} // Open the modal on click
                 className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-red-600 to-red-500 group-hover:from-red-600 group-hover:to-red-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800"
               >
                 <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
@@ -66,7 +75,7 @@ const Header = () => {
               </button>
             ) : (
               <button
-                onClick={openModal}
+                onClick={openLoginModal}
                 className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
               >
                 <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
@@ -92,9 +101,6 @@ const Header = () => {
               <li>
                 <Link to="/" className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700" aria-current="page">Home</Link>
               </li>
-              {/* <li>
-                <Link to="/dashboard" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white">Dashboard</Link>
-              </li> */}
               <li>
                 <Link to="/bail-application" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white">Bail Application</Link>
               </li>
@@ -103,8 +109,31 @@ const Header = () => {
         </div>
       </nav>
 
+      {/* Logout Confirmation Modal */}
+      {logoutConfirmOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"> {/* High z-index */}
+          <div className="bg-white p-6 rounded-lg shadow-lg text-center w-full max-w-md"> {/* Centered modal */}
+            <h2 className="text-lg font-semibold mb-4">Are you sure you want to logout?</h2>
+            <div className="flex justify-center space-x-4">
+              <button
+                onClick={handleLogout}
+                className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+              >
+                Logout
+              </button>
+              <button
+                onClick={closeLogoutConfirm}
+                className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {isModalOpen && (
-        <LoginModal onClose={closeModal} onLoginSuccess={onLoginSuccess} />
+        <LoginModal onClose={closeLoginModal} onLoginSuccess={onLoginSuccess} />
       )}
     </header>
   );

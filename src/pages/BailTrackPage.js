@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from '../firebase'; // Ensure firebase is properly configured
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, query, where, getDocs } from 'firebase/firestore';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { Link } from 'react-router-dom';
@@ -13,11 +13,19 @@ const BailTrackPage = () => {
 
   useEffect(() => {
     const fetchBailRequests = async () => {
+      if (!user) {
+        console.log('User not logged in');
+        setLoading(false);
+        return;
+      }
+
       try {
-        const querySnapshot = await getDocs(collection(db, 'bailRequests'));
+        // Create a query that filters bail requests by the logged-in user's ID
+        const q = query(collection(db, 'bailRequests'), where('userId', '==', user.uid));
+        const querySnapshot = await getDocs(q);
         const requests = querySnapshot.docs.map(doc => ({
           id: doc.id,
-          ...doc.data()
+          ...doc.data(),
         }));
         setBailRequests(requests);
         setLoading(false);
@@ -28,7 +36,7 @@ const BailTrackPage = () => {
     };
 
     fetchBailRequests();
-  }, []);
+  }, [user]);
 
   const getStatusProgress = (status) => {
     switch (status) {
@@ -47,6 +55,10 @@ const BailTrackPage = () => {
 
   if (loading) {
     return <div>Loading...</div>;
+  }
+
+  if (!bailRequests.length) {
+    return <div>No bail requests found for this user.</div>;
   }
 
   return (
@@ -76,13 +88,9 @@ const BailTrackPage = () => {
               <p className="text-gray-600 mb-2"><strong>Address:</strong> {request.address}</p>
               <p className="text-gray-600 mb-2"><strong>Status:</strong> {request.status}</p>
               <p className="text-gray-600 mb-4"><strong>Additional Info:</strong> {request.additionalInfo}</p>
-              {user ? (
-                <Link to={`/bailtrackpage/${request.id}`} className="text-indigo-600 hover:text-indigo-900">
-                  View Details
-                </Link>
-              ) : (
-                <p className="text-red-600">Please login to view details.</p>
-              )}
+              <Link to={`/bailtrackpage/${request.id}`} className="text-indigo-600 hover:text-indigo-900">
+                View Details
+              </Link>
             </div>
           ))}
         </div>
