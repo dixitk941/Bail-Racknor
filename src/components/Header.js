@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import LoginModal from './LoginModal'; // Adjust the path as necessary
 import { auth } from '../firebase'; // Ensure firebase is properly configured
 import { onAuthStateChanged, signOut } from 'firebase/auth';
@@ -8,6 +8,8 @@ const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -37,6 +39,8 @@ const Header = () => {
     try {
       await signOut(auth);
       console.log('Logged out successfully');
+      // Redirect to the homepage
+      navigate('/');
     } catch (err) {
       console.error('Logout failed', err.message);
     }

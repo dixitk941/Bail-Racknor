@@ -10,6 +10,7 @@ import BailApplicationPage from './pages/BailApplicationPage';
 import UndertrialPrisonersDashboard from './pages/UndertrialPrisonersDashboard';
 import LegalAidProvidersDashboard from './pages/LegalAidProvidersDashboard';
 import JudicialAuthoritiesDashboard from './pages/JudicialAuthoritiesDashboard';
+import BailTrackPage from './pages/BailTrackPage';
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
             <Route path="/undertrial-prisoners" element={<UndertrialPrisonersDashboard />} />
             <Route path="/legal-aid-providers" element={<LegalAidProvidersDashboard />} />
             <Route path="/judicial-authorities" element={<JudicialAuthoritiesDashboard />} />
+            <Route path="/bailtrackpage/:id" element={<BailTrackPage />} />
           </Routes>
         </main>
         <Footer />

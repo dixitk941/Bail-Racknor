@@ -1,5 +1,8 @@
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../firebase'; // Ensure firebase is properly configured
 import HeroSection from '../components/HeroSection';
+import BailRequestTrack from '../components/BailRequestTrack';
 // import FeaturesSection from '../components/FeatureSection';
 // import HowItWorksSection from '../components/HowItWorksSection';
 // import CTASection from '../components/CTASection';
@@ -7,13 +10,14 @@ import HeroSection from '../components/HeroSection';
 // import LawInfo from './LawInfo';
 
 const HomePage = () => {
+  const [user] = useAuthState(auth);
+
   return (
     <main>
-            {/* <ScrollEffect /> Add ScrollEffect here */}
-
+      {/* <ScrollEffect /> Add ScrollEffect here */}
       <HeroSection />
+      {user && <BailRequestTrack />} {/* Show BailRequestTrack only when user is logged in */}
       {/* <LawInfo /> */}
-      
 
       {/* Features Section */}
       {/* <FeaturesSection /> */}
@@ -23,9 +27,6 @@ const HomePage = () => {
 
       {/* CTA Section */}
       {/* <CTASection /> */}
-
-      {/* Scroll Progress Bar (if needed without animation) */}
-      {/* <div className="fixed top-0 left-0 right-0 h-1 bg-blue-500"></div> */}
     </main>
   );
 };
