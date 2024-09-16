@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import LoginModal from './LoginModal'; // Adjust the path as necessary
-import { auth } from '../firebase'; // Ensure firebase is properly configured
+import LoginModal from './LoginModal'; 
+import { auth } from '../firebase'; 
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 
 const Header = () => {
@@ -92,9 +92,9 @@ const Header = () => {
               <li>
                 <Link to="/" className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700" aria-current="page">Home</Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to="/dashboard" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white">Dashboard</Link>
-              </li>
+              </li> */}
               <li>
                 <Link to="/bail-application" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white">Bail Application</Link>
               </li>
