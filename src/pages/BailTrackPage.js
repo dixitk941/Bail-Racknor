@@ -10,6 +10,7 @@ const BailTrackPage = () => {
   const [bailRequests, setBailRequests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [user] = useAuthState(auth);
+  const [theme, setTheme] = useState('light');
 
   useEffect(() => {
     const fetchBailRequests = async () => {
@@ -38,6 +39,18 @@ const BailTrackPage = () => {
     fetchBailRequests();
   }, [user]);
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    setTheme(mediaQuery.matches ? 'dark' : 'light');
+
+    const handleChange = (e) => {
+      setTheme(e.matches ? 'dark' : 'light');
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
+
   const getStatusProgress = (status) => {
     switch (status) {
       case 'Pending':
@@ -62,14 +75,14 @@ const BailTrackPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 py-12">
+    <div className={`min-h-screen ${theme === 'dark' ? 'bg-gray-900 text-gray-100' : 'bg-gray-100 text-gray-900'} py-12`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Bail Request Tracker</h1>
+        <h1 className="text-3xl font-bold mb-8">Bail Request Tracker</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {bailRequests.map(request => (
-            <div key={request.id} className="bg-white p-6 rounded-lg shadow-lg">
+            <div key={request.id} className={`p-6 rounded-lg shadow-lg ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-semibold text-gray-800">{request.applicantName}</h2>
+                <h2 className="text-xl font-semibold">{request.applicantName}</h2>
                 <div style={{ width: 50, height: 50 }}>
                   <CircularProgressbar
                     value={getStatusProgress(request.status)}
@@ -77,17 +90,17 @@ const BailTrackPage = () => {
                     styles={buildStyles({
                       textSize: '16px',
                       pathColor: getStatusProgress(request.status) === 100 ? '#4caf50' : '#ff6347',
-                      textColor: '#000000',
-                      trailColor: '#d6d6d6',
+                      textColor: theme === 'dark' ? '#fff' : '#000',
+                      trailColor: theme === 'dark' ? '#374151' : '#d6d6d6',
                     })}
                   />
                 </div>
               </div>
-              <p className="text-gray-600 mb-2"><strong>Case Number:</strong> {request.caseNumber}</p>
-              <p className="text-gray-600 mb-2"><strong>Email:</strong> {request.email}</p>
-              <p className="text-gray-600 mb-2"><strong>Address:</strong> {request.address}</p>
-              <p className="text-gray-600 mb-2"><strong>Status:</strong> {request.status}</p>
-              <p className="text-gray-600 mb-4"><strong>Additional Info:</strong> {request.additionalInfo}</p>
+              <p className="mb-2"><strong>Case Number:</strong> {request.caseNumber}</p>
+              <p className="mb-2"><strong>Email:</strong> {request.email}</p>
+              <p className="mb-2"><strong>Address:</strong> {request.address}</p>
+              <p className="mb-2"><strong>Status:</strong> {request.status}</p>
+              <p className="mb-4"><strong>Additional Info:</strong> {request.additionalInfo}</p>
               <Link to={`/bailtrackpage/${request.id}`} className="text-indigo-600 hover:text-indigo-900">
                 View Details
               </Link>
