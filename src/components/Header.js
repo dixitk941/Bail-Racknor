@@ -60,8 +60,7 @@ const Header = () => {
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <Link to="/" className="flex items-center space-x-3">
-            <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Logo" />
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Bail Reckoner</span>
+          <img src="https://firebasestorage.googleapis.com/v0/b/bail-reckoner-21549.appspot.com/o/BAIL%20RECKNOR.png?alt=media&token=562f9ae8-1e36-41fc-83f2-2c292efabca3" className="h-20" alt="Logo" />            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Bail Reckoner</span>
           </Link>
           <div className="flex md:order-2 space-x-3">
             {user ? (
