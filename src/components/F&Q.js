@@ -21,45 +21,45 @@ const FAQ = () => {
         <h2 className="mb-12 text-4xl font-bold text-center sm:text-5xl">Frequently Asked Questions</h2>
         <div className={`flex flex-col divide-y sm:px-8 lg:px-12 xl:px-32 ${theme === 'dark' ? 'divide-gray-700' : 'divide-gray-300'}`}>
           <details>
-            <summary className="py-2 outline-none cursor-pointer focus:underline">How can I place an order?</summary>
+            <summary className="py-2 outline-none cursor-pointer focus:underline">How do I apply for bail through Bail Recknor?</summary>
             <div className="px-4 pb-4">
-              <p>You can easily place an order on our website by browsing our product catalog, selecting the items you want, and adding them to your cart. Then, proceed to checkout, where you can provide your shipping and payment information to complete the order.</p>
+              <p>To apply for bail, you can fill out our online bail application form. After providing the required personal and case information, our legal team will review your application and guide you through the next steps, which may include submitting supporting documents and attending a court hearing.</p>
             </div>
           </details>
           <details>
-            <summary className="py-2 outline-none cursor-pointer focus:underline">What payment methods do you accept?</summary>
+            <summary className="py-2 outline-none cursor-pointer focus:underline">What documents are required for a bail application?</summary>
             <div className="px-4 pb-4">
-              <p>We accept various payment methods, including credit cards, debit cards, net banking, and mobile wallet payments. You can choose the payment option that is most convenient for you during the checkout process.</p>
+              <p>You will need to submit key documents such as an FIR copy, charge sheet, personal identification, and other relevant case documents. Our team will inform you of any additional paperwork needed depending on the specifics of your case.</p>
             </div>
           </details>
           <details>
-            <summary className="py-2 outline-none cursor-pointer focus:underline">How long does shipping take?</summary>
+            <summary className="py-2 outline-none cursor-pointer focus:underline">How long does the bail process take?</summary>
             <div className="px-4 pb-4">
-              <p>Shipping times may vary depending on your location and the shipping method chosen. Typically, orders are processed within 1-2 business days, and delivery can take 3-7 business days within India. You will receive a tracking notification once your order is shipped.</p>
+              <p>The bail process duration can vary based on the complexity of the case and the court's schedule. Typically, it may take anywhere from a few days to a couple of weeks. Our platform will keep you updated on the progress at every stage.</p>
             </div>
           </details>
           <details>
-            <summary className="py-2 outline-none cursor-pointer focus:underline">Can I return a product if I'm not satisfied?</summary>
+            <summary className="py-2 outline-none cursor-pointer focus:underline">Can I track the status of my bail application?</summary>
             <div className="px-4 pb-4">
-              <p>Yes, we have a hassle-free return policy. If you are not satisfied with your purchase, you can initiate a return within 30 days of receiving the product. Please contact our customer support at <a href="mailto:example@gmail.com" className="underline">example@gmail.com</a> for assistance.</p>
+              <p>Yes, Bail Recknor offers a tracking system where you can monitor the status of your application. Simply log into your account to view real-time updates on your bail application process.</p>
             </div>
           </details>
           <details>
-            <summary className="py-2 outline-none cursor-pointer focus:underline">Do you offer international shipping?</summary>
+            <summary className="py-2 outline-none cursor-pointer focus:underline">What happens if my bail application is denied?</summary>
             <div className="px-4 pb-4">
-              <p>Currently, we only provide shipping services within India. However, we may consider expanding our shipping options to international locations in the future. Please stay updated with our website for any changes in shipping destinations.</p>
+              <p>If your bail application is denied, our legal team will assist you in filing an appeal or exploring other legal options to secure bail. We are committed to providing continuous support until your case reaches a resolution.</p>
             </div>
           </details>
           <details>
-            <summary className="py-2 outline-none cursor-pointer focus:underline">What is your customer support contact?</summary>
+            <summary className="py-2 outline-none cursor-pointer focus:underline">How can I contact Bail Recknor for support?</summary>
             <div className="px-4 pb-4">
-              <p>If you have any questions, concerns, or need assistance, you can reach our customer support team at 9911083755 during our business hours, Monday to Saturday from 10 am to 6 pm. You can also contact us via email at <a href="mailto:example@gmail.com" className="underline">example@gmail.com</a>.</p>
+              <p>If you need assistance, you can reach us at 9911083755 during business hours (Monday to Saturday from 10 am to 6 pm) or email us at <a href="mailto:example@gmail.com" className="underline">example@gmail.com</a>.</p>
             </div>
           </details>
           <details>
-            <summary className="py-2 outline-none cursor-pointer focus:underline">What are your terms and conditions?</summary>
+            <summary className="py-2 outline-none cursor-pointer focus:underline">What are the terms and conditions of Bail Recknor's services?</summary>
             <div className="px-4 pb-4">
-              <p>You can find our detailed terms and conditions by visiting our <a href="#" className="underline">Terms of Service</a> page on our website. It includes information about our policies, user guidelines, and more.</p>
+              <p>You can read the full terms and conditions of our services on the <a href="#" className="underline">Terms of Service</a> page on our website. It includes detailed information about our policies and procedures regarding bail applications.</p>
             </div>
           </details>
         </div>
