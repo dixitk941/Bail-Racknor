@@ -9,7 +9,7 @@ const PrivacyPolicy = () => {
         </h1>
         <div className="text-lg text-gray-700 space-y-6">
           <p>
-            Welcome to <strong>Bail Reckoner</strong>. Your privacy is of utmost importance to us. 
+            Welcome to <strong>Bail Mantri</strong>. Your privacy is of utmost importance to us. 
             This Privacy Policy outlines the types of personal information we collect, how we use and protect it, and your rights concerning your data.
           </p>
 

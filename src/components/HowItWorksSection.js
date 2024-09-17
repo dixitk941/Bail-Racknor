@@ -21,7 +21,7 @@ const HowItWorksSection = () => {
       <div className="max-w-7xl mx-auto text-center">
         {/* Section Title */}
         <h2 className={`text-2xl md:text-3xl lg:text-4xl font-bold ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
-          How <span className="text-indigo-600">Bail Reckoner</span> Works
+          How <span className="text-indigo-600">Bail Mantri</span> Works
         </h2>
         <p className={`mt-2 md:mt-4 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'} text-base md:text-lg`}>
           Follow these simple steps to streamline the bail application process.

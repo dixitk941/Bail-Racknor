@@ -1,80 +1,49 @@
-import React from "react";
+import React from 'react';
 
-const LicensingPage = () => {
+const LicensePage = () => {
   return (
-    <div className="bg-gray-50 min-h-screen flex items-center justify-center">
-      <div className="bg-white shadow-lg rounded-lg max-w-4xl p-8">
-        <h1 className="text-4xl font-bold text-center text-gray-900 mb-6">
-          Licensing Information
-        </h1>
+    <div className="bg-gray-100 min-h-screen py-12 px-6 md:px-24 lg:px-48">
+      <div className="bg-white shadow-lg rounded-lg p-6 md:p-12">
+        <h1 className="text-3xl font-bold text-center mb-8">Apache License</h1>
+        <h2 className="text-xl font-semibold text-center mb-4">Version 2.0, January 2004</h2>
+        <p className="text-center text-blue-600 mb-12">
+          <a href="http://www.apache.org/licenses/" target="_blank" rel="noopener noreferrer">
+            http://www.apache.org/licenses/
+          </a>
+        </p>
 
-        <div className="space-y-8">
-          <section>
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Bail Reckoner License</h2>
-            <p className="text-gray-600 leading-relaxed">
-              The <strong>Bail Reckoner</strong> project is licensed under the{" "}
-              <a
-                href="https://opensource.org/licenses/MIT"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-500 underline hover:text-blue-600"
-              >
-                MIT License
-              </a>
-              . This permits anyone to use, copy, modify, merge, publish, distribute, and sublicense copies of the software, 
-              provided that the original copyright notice is included in all copies or substantial portions of the software.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">React.js License</h2>
-            <p className="text-gray-600 leading-relaxed">
-              Bail Reckoner is built using{" "}
-              <a
-                href="https://reactjs.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-500 underline hover:text-blue-600"
-              >
-                React.js
-              </a>
-              , which is licensed under the MIT License. You are free to use and modify React.js for both personal and commercial use under this license.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Tailwind CSS License</h2>
-            <p className="text-gray-600 leading-relaxed">
-              We use{" "}
-              <a
-                href="https://tailwindcss.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-500 underline hover:text-blue-600"
-              >
-                Tailwind CSS
-              </a>{" "}
-              for styling, which is also licensed under the MIT License. Tailwind CSS allows for building custom UIs using predefined utility classes for consistency and simplicity.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Third-Party Libraries</h2>
-            <p className="text-gray-600 leading-relaxed">
-              Additional third-party libraries used in this project are subject to their respective licenses.
-              Please review the licenses of these libraries as required. All third-party code is maintained by its respective authors.
-            </p>
-          </section>
-        </div>
-
-        <div className="mt-8 text-center">
-          <p className="text-gray-500 text-sm">
-            © 2024 Bail Reckoner. All rights reserved.
+        <div className="text-sm space-y-4 leading-relaxed">
+          <p className="font-semibold">TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION</p>
+          <p className="font-semibold">1. Definitions.</p>
+          <p>
+            "License" shall mean the terms and conditions for use, reproduction, and distribution as defined by Sections 1 through 9 of this document.
           </p>
+          <p>
+            "Licensor" shall mean the copyright owner or entity authorized by the copyright owner that is granting the License.
+          </p>
+          <p>
+            "Legal Entity" shall mean the union of the acting entity and all other entities that control, are controlled by, or are under common control with that entity...
+          </p>
+
+          {/* You can keep adding more of the license text here */}
+
+          <h3 className="font-semibold mt-6">2. Grant of Copyright License.</h3>
+          <p>
+            Subject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+            copyright license to reproduce, prepare Derivative Works of, publicly display, publicly perform, sublicense, and distribute the Work and such Derivative Works in Source or Object form...
+          </p>
+
+          <h3 className="font-semibold mt-6">END OF TERMS AND CONDITIONS</h3>
         </div>
+
+        <footer className="mt-12">
+          <p className="text-sm text-gray-500 text-center">
+            BailMantri | Licensed under the Apache License, Version 2.0
+          </p>
+        </footer>
       </div>
     </div>
   );
 };
 
-export default LicensingPage;
+export default LicensePage;

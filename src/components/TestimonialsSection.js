@@ -7,14 +7,14 @@ const TestimonialsSection = () => {
       name: "John Doe",
       role: "Legal Aid Provider",
       feedback:
-        "Bail Reckoner made it so easy to manage and submit bail applications for my clients. The process is seamless and saves us so much time.",
+        "Bail Mantri made it so easy to manage and submit bail applications for my clients. The process is seamless and saves us so much time.",
       image: "https://via.placeholder.com/100x100",
     },
     {
       name: "Jane Smith",
       role: "Family Member",
       feedback:
-        "The platform gave me peace of mind by keeping me informed throughout the entire bail process. Highly recommend Bail Reckoner!",
+        "The platform gave me peace of mind by keeping me informed throughout the entire bail process. Highly recommend Bail Mantri!",
       image: "https://via.placeholder.com/100x100",
     },
     {
@@ -34,7 +34,7 @@ const TestimonialsSection = () => {
           What People Are Saying
         </h2>
         <p className="mt-4 text-gray-600 text-lg">
-          Hear from those who have benefitted from Bail Reckoner.
+          Hear from those who have benefitted from Bail Mantri.
         </p>
 
         {/* Testimonials Grid */}

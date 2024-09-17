@@ -66,7 +66,7 @@ const HeroSection = () => {
             <span className="text-yellow-300">Undertrial Prisoners</span>
           </h1>
           <p className="mt-4 text-base lg:text-lg text-gray-700 dark:text-gray-300 max-w-xs lg:max-w-md mx-auto lg:mx-0 leading-relaxed drop-shadow-lg">
-            Bail Reckoner is your digital companion, designed to streamline the bail process for undertrial prisoners, legal aid providers, and judicial authorities. Fast, secure, and efficient.
+            Bail Mantri is your digital companion, designed to streamline the bail process for undertrial prisoners, legal aid providers, and judicial authorities. Fast, secure, and efficient.
           </p>
           <div className="mt-6 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
             <button className="bg-yellow-300 text-gray-800 dark:text-gray-900 py-2 px-6 rounded-full shadow-lg hover:bg-yellow-400 transform hover:scale-105 transition duration-300">
@@ -127,7 +127,7 @@ const FeaturesSection = () => {
       <div className="max-w-7xl mx-auto text-center">
         {/* Section Title */}
         <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-gray-100">
-          Why Choose <span className="text-indigo-600">Bail Reckoner?</span>
+          Why Choose <span className="text-indigo-600">Bail Mantri?</span>
         </h2>
         <p className="mt-2 text-base lg:text-lg text-gray-700 dark:text-gray-300">
           Our platform offers a variety of features designed to make the bail application process easier, faster, and more transparent.
