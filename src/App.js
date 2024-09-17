@@ -13,6 +13,7 @@ import JudicialAuthoritiesDashboard from './pages/JudicialAuthoritiesDashboard';
 import BailTrackPage from './pages/BailTrackPage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import LicensingPage from './pages/LicensingPage';
+import Contact from './pages/Contact';
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
             <Route path="/bailtrackpage/:id" element={<BailTrackPage />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/LicensingPage" element={<LicensingPage />} />
+            <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>
         <Footer />

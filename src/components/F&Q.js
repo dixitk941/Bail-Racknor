@@ -21,7 +21,7 @@ const FAQ = () => {
         <h2 className="mb-12 text-4xl font-bold text-center sm:text-5xl">Frequently Asked Questions</h2>
         <div className={`flex flex-col divide-y sm:px-8 lg:px-12 xl:px-32 ${theme === 'dark' ? 'divide-gray-700' : 'divide-gray-300'}`}>
           <details>
-            <summary className="py-2 outline-none cursor-pointer focus:underline">How do I apply for bail through Bail Recknor?</summary>
+            <summary className="py-2 outline-none cursor-pointer focus:underline">How do I apply for bail through Bail Mantri?</summary>
             <div className="px-4 pb-4">
               <p>To apply for bail, you can fill out our online bail application form. After providing the required personal and case information, our legal team will review your application and guide you through the next steps, which may include submitting supporting documents and attending a court hearing.</p>
             </div>
@@ -41,7 +41,7 @@ const FAQ = () => {
           <details>
             <summary className="py-2 outline-none cursor-pointer focus:underline">Can I track the status of my bail application?</summary>
             <div className="px-4 pb-4">
-              <p>Yes, Bail Recknor offers a tracking system where you can monitor the status of your application. Simply log into your account to view real-time updates on your bail application process.</p>
+              <p>Yes, Bail Mantri offers a tracking system where you can monitor the status of your application. Simply log into your account to view real-time updates on your bail application process.</p>
             </div>
           </details>
           <details>
@@ -51,13 +51,13 @@ const FAQ = () => {
             </div>
           </details>
           <details>
-            <summary className="py-2 outline-none cursor-pointer focus:underline">How can I contact Bail Recknor for support?</summary>
+            <summary className="py-2 outline-none cursor-pointer focus:underline">How can I contact Bail Mantri for support?</summary>
             <div className="px-4 pb-4">
               <p>If you need assistance, you can reach us at 9911083755 during business hours (Monday to Saturday from 10 am to 6 pm) or email us at <a href="mailto:example@gmail.com" className="underline">example@gmail.com</a>.</p>
             </div>
           </details>
           <details>
-            <summary className="py-2 outline-none cursor-pointer focus:underline">What are the terms and conditions of Bail Recknor's services?</summary>
+            <summary className="py-2 outline-none cursor-pointer focus:underline">What are the terms and conditions of Bail Mantri's services?</summary>
             <div className="px-4 pb-4">
               <p>You can read the full terms and conditions of our services on the <a href="#" className="underline">Terms of Service</a> page on our website. It includes detailed information about our policies and procedures regarding bail applications.</p>
             </div>
