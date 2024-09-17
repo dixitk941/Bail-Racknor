@@ -54,7 +54,7 @@ const FloatingProgressBar = () => {
   const progress = bailRequests.length ? (bailRequests.filter(req => req.status === 'approved').length / bailRequests.length) * 100 : 0;
 
   const handleClick = () => {
-    navigate('/bailtrackpage');
+    navigate('/bailtrackpage/:id');
   };
 
   return (

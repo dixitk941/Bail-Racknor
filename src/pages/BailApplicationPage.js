@@ -127,23 +127,24 @@ const BailApplicationPage = () => {
     const doc = new jsPDF();
   
     try {
-      // Adding the logo (Ensure you have a logo URL or a base64 string)
-      const logoUrl = 'https://flowbite.com/docs/images/logo.svg';
-      const logoBase64 = await getBase64FromUrl(logoUrl);
-      
-      // Adjust dimensions as needed
-      doc.addImage(logoBase64, 'SVG', 10, 10, 50, 20);
+      // Convert the image to base64
+      const logoBase64 = await getBase64FromUrl('/BAIL RECKNOR.png');
   
-      // Header with Organization & Department details
+      // Add logo in a circular shape
+      doc.setFillColor(255, 255, 255);
+      doc.circle(20, 20, 15, 'F');
+      doc.addImage(logoBase64, 'PNG', 10, 10, 20, 20);
+  
+      // Add header
       doc.setFontSize(18);
-      doc.text('Organization: Ministry of Law & Justice', 50, 20);
-      doc.text('Department: Department of Justice', 50, 30);
-      doc.text('Bail Application', 50, 40);
+      doc.text('Ministry of Law & Justice', 40, 15);
+      doc.text('Department of Justice', 40, 25);
+      doc.text('Bail Application', 40, 35);
   
-      // Form content
+      // Add form content
       doc.setFontSize(12);
       doc.autoTable({
-        startY: 60,
+        startY: 50,
         head: [['Field', 'Value']],
         body: [
           ['Applicant Name', formData.applicantName],
@@ -154,15 +155,17 @@ const BailApplicationPage = () => {
         ],
       });
   
-      // Footer
-      doc.setFontSize(10);
-      doc.text('For any queries, contact us at support@example.com', 20, doc.internal.pageSize.height - 20);
-      doc.text('© 2024 Ministry of Law & Justice', 20, doc.internal.pageSize.height - 10);
+      // Add footer
+      const pageCount = doc.internal.getNumberOfPages();
+      for (let i = 1; i <= pageCount; i++) {
+        doc.setPage(i);
+        doc.setFontSize(10);
+        doc.text(`Page ${i} of ${pageCount}`, doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+      }
   
-      // Save the PDF
       doc.save('BailApplicationForm.pdf');
     } catch (error) {
-      console.error('Error generating PDF:', error);
+      console.error('Error generating PDF: ', error);
     }
   };
 
