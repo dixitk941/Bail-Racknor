@@ -101,7 +101,7 @@ const BailTrackPage = () => {
               <p className="mb-2"><strong>Address:</strong> {request.address}</p>
               <p className="mb-2"><strong>Status:</strong> {request.status}</p>
               <p className="mb-4"><strong>Additional Info:</strong> {request.additionalInfo}</p>
-              <Link to={`/bailtrackpage/${request.id}`} className="text-indigo-600 hover:text-indigo-900">
+              <Link to={`/completebail/${request.id}`} className="text-indigo-600 hover:text-indigo-900">
                 View Details
               </Link>
             </div>

@@ -125,37 +125,49 @@ const BailApplicationPage = () => {
   
   const generatePDF = async () => {
     const doc = new jsPDF();
-  
     try {
-      // Convert the image to base64
-      const logoBase64 = await getBase64FromUrl('/BAIL RECKNOR.png');
+      // Get the logo
+      const logoBase64 = await getBase64FromUrl('/BAIL RECKNOR.png'); // Adjust the logo URL as necessary
   
-      // Add logo in a circular shape
+      // Add logo to PDF
       doc.setFillColor(255, 255, 255);
       doc.circle(20, 20, 15, 'F');
       doc.addImage(logoBase64, 'PNG', 10, 10, 20, 20);
   
-      // Add header
+      // Header
       doc.setFontSize(18);
       doc.text('Ministry of Law & Justice', 40, 15);
       doc.text('Department of Justice', 40, 25);
       doc.text('Bail Application', 40, 35);
   
-      // Add form content
+      // Body content
       doc.setFontSize(12);
-      doc.autoTable({
-        startY: 50,
-        head: [['Field', 'Value']],
-        body: [
-          ['Applicant Name', formData.applicantName],
-          ['Case Number', formData.caseNumber],
-          ['Email', formData.email],
-          ['Address', formData.address],
-          ['Additional Info', formData.additionalInfo],
-        ],
-      });
+      doc.text(`To,`, 20, 50);
+      doc.text(`The Honorable Court`, 20, 60);
+      doc.text(`Subject: Bail Application for the case No. ${formData.caseNumber}`, 20, 70);
+      doc.text(`Respected Sir/Madam,`, 20, 80);
   
-      // Add footer
+      // Application content in letter format
+      const letterContent = `I, ${formData.applicantName}, respectfully submit this application requesting bail in the case registered against me, bearing case number ${formData.caseNumber}. 
+  
+  I am currently residing at ${formData.address}. I am a law-abiding citizen, and I have no intentions to evade the law. I fully intend to cooperate with the judicial process and ensure that I attend all court hearings and fulfill any obligations placed upon me during this legal proceeding.
+  
+  ${formData.additionalInfo ? `Additional Information: ${formData.additionalInfo}` : ''}
+  
+  I humbly request the court to consider granting me bail as I am willing to abide by all conditions that the court may impose upon me. I assure the court that I will not misuse the bail in any manner, nor will I attempt to leave the jurisdiction.
+  
+  Thank you for considering my application. I look forward to your kind and just decision in this matter.
+  
+  Sincerely,
+  ${formData.applicantName}
+  Contact: ${formData.email}`;
+  
+      // Split letterContent into lines for fitting in PDF
+      const lines = doc.splitTextToSize(letterContent, 170);
+  
+      doc.text(lines, 20, 90);
+  
+      // Footer with page numbers
       const pageCount = doc.internal.getNumberOfPages();
       for (let i = 1; i <= pageCount; i++) {
         doc.setPage(i);
@@ -163,11 +175,14 @@ const BailApplicationPage = () => {
         doc.text(`Page ${i} of ${pageCount}`, doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
       }
   
+      // Save the PDF
       doc.save('BailApplicationForm.pdf');
     } catch (error) {
       console.error('Error generating PDF: ', error);
+      alert('Error generating PDF.');
     }
   };
+  
 
   return (
     <div className={`min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 ${theme === 'dark' ? 'bg-gray-900 text-gray-400' : 'bg-gray-50 text-gray-900'}`}>
@@ -292,21 +307,7 @@ const BailApplicationPage = () => {
               </div>
             </motion.div>
 
-            {/* Progress Bar */}
-            {/* {isSubmitting && (
-              <motion.div className="mt-6" {...fadeInUp}>
-                <CircularProgressbar
-                  value={progress}
-                  text={`${progress}%`}
-                  styles={buildStyles({
-                    pathColor: '#4F46E5',
-                    textColor: theme === 'dark' ? '#D1D5DB' : '#111827',
-                    trailColor: theme === 'dark' ? '#374151' : '#E5E7EB',
-                  })}
-                />
-              </motion.div>
-            )} */}
-
+           
 <motion.div className="mt-6" {...fadeInUp}>
   <button
     type="submit"

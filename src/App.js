@@ -14,6 +14,7 @@ import BailTrackPage from './pages/BailTrackPage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import LicensingPage from './pages/LicensingPage';
 import Contact from './pages/Contact';
+import CompleteBail from './pages/CompleteBail'
 
 const App = () => {
   return (
@@ -34,6 +35,7 @@ const App = () => {
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/LicensingPage" element={<LicensingPage />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/completebail/:id" element={<CompleteBail />} />
           </Routes>
         </main>
         <Footer />
