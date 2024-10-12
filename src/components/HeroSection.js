@@ -73,23 +73,15 @@ const HeroSection = () => {
               Get Started
             </button>
 
-<a 
-    href="https://expo.dev/accounts/maruti941/projects/bailmantri/builds/90271489-c97c-4048-ab31-ec37f8e2f1d4" 
+  <a 
+    href="https://expo.dev/accounts/maruti941/projects/bailmantri/builds/90271489-c97c-4048-ab31-ec37f8e2f1d4" // Replace with your actual APK or Expo link
     target="_blank"
     rel="noopener noreferrer"
-    className="bg-yellow-300 text-gray-800 dark:text-gray-900 py-2 px-6 rounded-full shadow-lg hover:bg-yellow-400 transform hover:scale-105 transition duration-300 android-hidden"
->
+    className="bg-yellow-300 text-gray-800 dark:text-gray-900 py-2 px-6 rounded-full shadow-lg hover:bg-yellow-400 transform hover:scale-105 transition duration-300"
+  >
     Download Android App
-</a>
+  </a>
 
-<style>
-  @media only screen and (max-width: 768px) and (-webkit-device-pixel-ratio: 2) {
-    /* Hide for Android devices */
-    .android-hidden {
-      display: none;
-    }
-  }
-</style>
 
           </div>
         </motion.div>
