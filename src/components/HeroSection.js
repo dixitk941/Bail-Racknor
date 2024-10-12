@@ -72,9 +72,17 @@ const HeroSection = () => {
             <button className="bg-yellow-300 text-gray-800 dark:text-gray-900 py-2 px-6 rounded-full shadow-lg hover:bg-yellow-400 transform hover:scale-105 transition duration-300">
               Get Started
             </button>
-            <button className="bg-transparent text-gray-900 dark:text-white py-2 px-6 border border-gray-900 dark:border-white rounded-full hover:bg-gray-900 dark:hover:bg-white hover:text-white dark:hover:text-gray-900 transform hover:scale-105 transition duration-300">
-              Learn More
-            </button>
+<div className="mt-6 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+  <a 
+    href="https://expo.dev/accounts/maruti941/projects/bailmantri/builds/90271489-c97c-4048-ab31-ec37f8e2f1d4" // Replace with your actual APK or Expo link
+    target="_blank"
+    rel="noopener noreferrer"
+    className="bg-yellow-300 text-gray-800 dark:text-gray-900 py-2 px-6 rounded-full shadow-lg hover:bg-yellow-400 transform hover:scale-105 transition duration-300"
+  >
+    Download Android App
+  </a>
+</div>
+
           </div>
         </motion.div>
 
